@@ -1,0 +1,23 @@
+
+select*from car order by year asc;  
+
+select count(report_no)
+from car c,participated p
+where c.reg_no=p.reg_no and c.model='Lancer';
+
+select * from participated 
+order by damage_amount desc;
+
+select avg(damage_amount) from participated;
+
+DELETE from participated
+where damage_amount<(select p.d_amount from(select avg(damage_amount)as d_amount from participated)p);
+ 
+select driver_id from participated
+where damage_amount < (select avg(damage_amount) from participated);
+ 
+select p.name from person p,participated pa
+where p.driver_id = pa.driver_id and pa.damage_amount > (select avg(pa.damage_amount) from participated pa);
+ 
+select max(damage_amount) as 'maximum' from participated; 
+ 
